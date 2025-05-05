@@ -7,7 +7,7 @@ import {cd} from "./src/nwd/cd.js";
 import {up} from "./src/nwd/up.js";
 import {cat} from "./src/nwd/cat.js";
 import {add} from "./src/nwd/add.js";
-// import {mkdir} from "./mkdir.js";
+import {mkdir} from "./src/nwd/mkdir.js";
 // import {rn} from "./rn.js";
 // import {cp} from "./cp.js";
 const args = process.argv.slice(2);
@@ -58,6 +58,7 @@ rl.on("line", async (line) => {
 			case ".exit":
 				exitApp();
 				return;
+
 			case "cat":
 				if (args.length !== 1) {
 					console.log("Invalid input: Expect to have: 1 param(s) provided.");
@@ -65,9 +66,15 @@ rl.on("line", async (line) => {
 					await cat(currentDir, args[0]);
 				}
 				break;
+
 			case "add":
 				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
 				else await add(currentDir, args[0]);
+				break;
+
+			case "mkdir":
+				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
+				else await mkdir(currentDir, args[0]);
 				break;
 			default:
 				console.log("Invalid input");
