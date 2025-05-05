@@ -5,6 +5,7 @@ import readline from "node:readline";
 import {ls} from "./src/nwd/ls.js";
 import {cd} from "./src/nwd/cd.js";
 import {up} from "./src/nwd/up.js";
+import {cat} from "./src/nwd/cat.js";
 
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -54,7 +55,13 @@ rl.on("line", async (line) => {
 			case ".exit":
 				exitApp();
 				return;
-
+			case "cat":
+				if (args.length !== 1) {
+					console.log("Invalid input: Expect to have: 1 param(s) provided.");
+				} else {
+					await cat(currentDir, args[0]);
+				}
+				break;
 			default:
 				console.log("Invalid input");
 		}
