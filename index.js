@@ -9,7 +9,7 @@ import {cat} from "./src/nwd/cat.js";
 import {add} from "./src/nwd/add.js";
 import {mkdir} from "./src/nwd/mkdir.js";
 import {rn} from "./src/nwd/rn.js";
-//  import {cp} from "./src/nwd/cp.js";
+import {cp} from "./src/nwd/cp.js";
 
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -80,6 +80,11 @@ rl.on("line", async (line) => {
 			case "rn":
 				if (args.length !== 2) console.log("Invalid input: Expect to have: 2 param(s) provided.");
 				else await rn(currentDir, args[0], args[1]);
+				break;
+
+			case "cp":
+				if (args.length !== 2) console.log("Invalid input: Expect to have: 2 param(s) provided.");
+				else await cp(currentDir, args[0], args[1]);
 				break;
 
 			default:
