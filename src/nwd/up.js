@@ -1,15 +1,11 @@
-// up.js
 import path from "node:path";
-import os from "node:os";
 
-let currentDir = os.homedir(); 
-
-const up = async () => {
+export const up = (currentDir) => {
 	const root = path.parse(currentDir).root;
-	if (currentDir === root) return;
-	currentDir = path.dirname(currentDir);
-	console.log(`You are currently in ${currentDir}`);
+	if (currentDir === root) {
+		console.log("You are already at the root directory.");
+		return currentDir;
+	}
+	const parentDir = path.dirname(currentDir);
+	return parentDir;
 };
-
-await up(); // First up
-await up(); // Second up to root
