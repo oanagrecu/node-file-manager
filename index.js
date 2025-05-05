@@ -6,7 +6,10 @@ import {ls} from "./src/nwd/ls.js";
 import {cd} from "./src/nwd/cd.js";
 import {up} from "./src/nwd/up.js";
 import {cat} from "./src/nwd/cat.js";
-
+import {add} from "./src/nwd/add.js";
+// import {mkdir} from "./mkdir.js";
+// import {rn} from "./rn.js";
+// import {cp} from "./cp.js";
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
 const username = usernameArg?.split("=")[1];
@@ -61,6 +64,10 @@ rl.on("line", async (line) => {
 				} else {
 					await cat(currentDir, args[0]);
 				}
+				break;
+			case "add":
+				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
+				else await add(currentDir, args[0]);
 				break;
 			default:
 				console.log("Invalid input");

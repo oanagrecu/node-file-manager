@@ -1,4 +1,3 @@
-// src/cat.js
 import fs from "node:fs";
 import path from "node:path";
 
@@ -10,7 +9,7 @@ export const cat = async (currentDir, filePath) => {
 
 		readStream.on("error", () => {
 			console.log("Operation failed");
-			resolve(); // Allow returning to prompt
+			resolve();
 		});
 
 		readStream.on("open", () => {
@@ -18,8 +17,8 @@ export const cat = async (currentDir, filePath) => {
 		});
 
 		readStream.on("end", () => {
-			console.log(); // Add newline after content
-			resolve(); // Allow returning to prompt
+			console.log();
+			resolve();
 		});
 	});
 };
