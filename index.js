@@ -12,6 +12,7 @@ import {rn} from "./src/nwd/rn.js";
 import {cp} from "./src/nwd/cp.js";
 import {mv} from "./src/nwd/mv.js";
 import {rm} from "./src/nwd/rm.js";
+import {hash} from "./src/hash/hash.js";
 
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -97,6 +98,11 @@ rl.on("line", async (line) => {
 				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
 				else await rm(currentDir, args[0]);
 				break;
+			case "hash":
+				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
+				else await hash(currentDir, args[0]);
+				break;
+
 			default:
 				console.log("Invalid input");
 		}
