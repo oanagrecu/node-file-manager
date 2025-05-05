@@ -13,6 +13,7 @@ import {cp} from "./src/nwd/cp.js";
 import {mv} from "./src/nwd/mv.js";
 import {rm} from "./src/nwd/rm.js";
 import {hash} from "./src/hash/hash.js";
+import {getEOL, getCPUs, getHomeDir, getUsername, getArchitecture} from "./src/os/os.js";
 
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -80,6 +81,7 @@ rl.on("line", async (line) => {
 				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
 				else await mkdir(currentDir, args[0]);
 				break;
+
 			case "rn":
 				if (args.length !== 2) console.log("Invalid input: Expect to have: 2 param(s) provided.");
 				else await rn(currentDir, args[0], args[1]);
@@ -94,13 +96,53 @@ rl.on("line", async (line) => {
 				if (args.length !== 2) console.log("Invalid input: Expect to have: 2 param(s) provided.");
 				else await mv(currentDir, args[0], args[1]);
 				break;
+
 			case "rm":
 				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
 				else await rm(currentDir, args[0]);
 				break;
+
 			case "hash":
 				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
 				else await hash(currentDir, args[0]);
+				break;
+			case "os":
+				if (args.length !== 1) {
+					console.log("Invalid input: Expect to have: 1 param(s) provided.");
+				} else {
+					switch (args[0]) {
+						case "--EOL":
+							const eol = getEOL();
+
+							break;
+
+						case "--cpus":
+							const cpuInfo = getCPUs();
+							console.log(`Total CPUs: ${cpuInfo.totalCPUs}`);
+							cpuInfo.cpuInfo.forEach((cpu) =>
+								console.log(
+									`CPU ${cpu.index}: Model - ${cpu.model}, Clock Speed - ${cpu.clockSpeed} GHz`
+								)
+							);
+							break;
+
+						case "--homedir":
+							console.log(getHomeDir());
+							break;
+
+						case "--username":
+							console.log(getUsername());
+							break;
+
+						case "--architecture":
+							console.log(getArchitecture());
+							break;
+
+						default:
+							console.log("Invalid OS command");
+							break;
+					}
+				}
 				break;
 
 			default:
