@@ -1,25 +1,33 @@
 import {promises as fs} from "node:fs";
+import path from "node:path";
+import Table from "cli-table3";
 
 export const ls = async (currentDir) => {
 	try {
 		const entries = await fs.readdir(currentDir, {withFileTypes: true});
 
-		const formattedEntries = entries
+		const formatted = entries
 			.map((entry) => ({
 				Name: entry.name,
 				Type: entry.isDirectory() ? "DIR" : "file",
 			}))
 			.sort((a, b) => {
-				if (a.Type !== b.Type) {
-					return a.Type === "DIR" ? -1 : 1;
-				}
+				// Sort: directories first, then files; both in alphabetical order
+				if (a.Type !== b.Type) return a.Type === "DIR" ? -1 : 1;
 				return a.Name.localeCompare(b.Name);
 			});
 
-		formattedEntries.forEach((entry, index) => {
-			console.log(`${index}\t'${entry.Name}'\t'${entry.Type}'`);
+		const table = new Table({
+			head: ["(index)", "Name", "Type"],
+			colAligns: ["right", "left", "left"],
 		});
-	} catch (err) {
+
+		formatted.forEach((entry, idx) => {
+			table.push([idx, `'${entry.Name}'`, `'${entry.Type}'`]);
+		});
+
+		console.log(table.toString());
+	} catch {
 		console.log("Operation failed");
 	}
 };
