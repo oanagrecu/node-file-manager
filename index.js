@@ -8,8 +8,9 @@ import {up} from "./src/nwd/up.js";
 import {cat} from "./src/nwd/cat.js";
 import {add} from "./src/nwd/add.js";
 import {mkdir} from "./src/nwd/mkdir.js";
-// import {rn} from "./rn.js";
-// import {cp} from "./cp.js";
+import {rn} from "./src/nwd/rn.js";
+//  import {cp} from "./src/nwd/cp.js";
+
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
 const username = usernameArg?.split("=")[1];
@@ -76,6 +77,11 @@ rl.on("line", async (line) => {
 				if (args.length !== 1) console.log("Invalid input: Expect to have: 1 param(s) provided.");
 				else await mkdir(currentDir, args[0]);
 				break;
+			case "rn":
+				if (args.length !== 2) console.log("Invalid input: Expect to have: 2 param(s) provided.");
+				else await rn(currentDir, args[0], args[1]);
+				break;
+
 			default:
 				console.log("Invalid input");
 		}
