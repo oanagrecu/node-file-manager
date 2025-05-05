@@ -12,7 +12,6 @@ export const ls = async (currentDir) => {
 				Type: entry.isDirectory() ? "DIR" : "file",
 			}))
 			.sort((a, b) => {
-				// Sort: directories first, then files; both in alphabetical order
 				if (a.Type !== b.Type) return a.Type === "DIR" ? -1 : 1;
 				return a.Name.localeCompare(b.Name);
 			});

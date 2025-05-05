@@ -6,10 +6,8 @@ export const rm = async (currentDir, file) => {
 	try {
 		const filePath = path.resolve(currentDir, file);
 
-		// Check if the file exists
 		await access(filePath, constants.F_OK);
 
-		// Delete the file
 		await fs.promises.unlink(filePath);
 
 		console.log(`File ${file} has been deleted.`);
