@@ -14,6 +14,8 @@ import {mv} from "./src/nwd/mv.js";
 import {rm} from "./src/nwd/rm.js";
 import {hash} from "./src/hash/hash.js";
 import {getEOL, getCPUs, getHomeDir, getUsername, getArchitecture} from "./src/os/os.js";
+import {compress} from "./src/zip/compress.js";
+import {decompress} from "./src/zip/decompress.js";
 
 const args = process.argv.slice(2);
 const usernameArg = args.find((arg) => arg.startsWith("--username="));
@@ -144,7 +146,23 @@ rl.on("line", async (line) => {
 					}
 				}
 				break;
+			case "compress":
+				if (args.length !== 2) {
+					console.log("Invalid input: Expect to have 2 param(s) provided.");
+				} else {
+					const [sourcePath, destinationPath] = args;
+					compress(sourcePath, destinationPath);
+				}
+				break;
 
+			case "decompress":
+				if (args.length !== 2) {
+					console.log("Invalid input: Expect to have 2 param(s) provided.");
+				} else {
+					const [sourcePath, destinationPath] = args;
+					decompress(sourcePath, destinationPath);
+				}
+				break;
 			default:
 				console.log("Invalid input");
 		}
