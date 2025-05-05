@@ -1,0 +1,16 @@
+{
+	"name": "file-manager",
+	"version": "1.0.0",
+	"description": "CLI File Manager using Node.js",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"engines": {
+		"node": ">=22.14.0"
+	}
+}
