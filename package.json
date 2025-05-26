@@ -2,14 +2,22 @@
 	"name": "file-manager",
 	"version": "1.0.0",
 	"description": "CLI File Manager using Node.js",
-	"main": "index.js",
+	"keywords": [],
+	"homepage": "https://github.com/oanagrecu/node-file-manager#readme",
+	"bugs": {
+		"url": "https://github.com/oanagrecu/node-file-manager/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/oanagrecu/node-file-manager.git"
+	},
+	"license": "ISC",
+	"author": "oanagrecu",
 	"type": "module",
+	"main": "index.js",
 	"scripts": {
 		"start": "node index.js"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
 	"engines": {
 		"node": ">=22.14.0"
 	}
